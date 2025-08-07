@@ -7,7 +7,9 @@ Instalar con uso de composer
     <li>Archivo .env.example cambiar de nombre a .env</li>
     <li>crear base de datos products_api_db</li>
     <li>php artisan migrate --seed</li>
-
+    <li>Importantes: En controllers</li>
+    <li>Migraciones</li>
+    <li>Impelentacion de JWT</li>
 
 </ul>
 </p>
