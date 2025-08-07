@@ -29,7 +29,7 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        $token = $request->session()->token();
+
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:customers',
@@ -52,23 +52,39 @@ class CustomerController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $customer = Customer::where('id', '=', $id)->first();
+
+         $data = [
+            'code' => 200,
+            'customer' => $customer
+        ];
+
+        return response()->json($data);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        //
+        $customer = Customer::find($id);
+
+        $customer->update($request->all());
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+            'phone' => 'nullable|string|max:20',
+            'address' => 'nullable|string|max:500',
+        ]);
+
+         $data = [
+            'code' => 200,
+            'customer' => $customer
+        ];
+
+        return response()->json($data);
     }
 
     /**

@@ -12,15 +12,14 @@ class MealController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $meal = Meal::all();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $data = [
+            'code' => 200,
+            'meal' => $meal
+        ];
+
+        return response()->json($data);
     }
 
     /**
@@ -28,7 +27,19 @@ class MealController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required',
+        ]);
+
+        $meal = Meal::create($request->all());
+
+         $data = [
+            'code' => 200,
+            'meal' => $meal
+        ];
+
+        return response()->json($data);
     }
 
     /**
